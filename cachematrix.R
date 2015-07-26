@@ -22,22 +22,22 @@ makeCacheMatrix <- function(mx = matrix()) {
         inversemx <- NULL
         
         ## set the value of the matrix
-        set <- function(x) {
-                mx <<- x;
-                inversemx <<- NULL;
+        set <- function(y) {
+                mx <<- y
+                inversemx <<- NULL
         }
         
         ## get the value of the matrix
-        get <- function() return(mx);
+        get <- function() mx
         
         ## set the value of the inverse
-        setinverse <- function(inv) inversemx <<- inv;
+        setinverse <- function(inv) inversemx <<- inv
         
         ## get the value of the inverse
-        getinverse <- function() return(inversemx);
+        getinverse <- function() inversemx
         
         ## creates a list containing all the above 4 function
-        return(list(set = set, get = get, set_inverse = setinverse, get_inverse = getinverse))
+        list(set=set, get=get, setinverse=setinverse, getinverse=getinverse)
 }
 
 ## This function computes the inverse of the special "matrix" returned by "makeCacheMatrix" 
@@ -55,9 +55,8 @@ cacheSolve <- function(mx, ...) {
         }
         
         ## if the inverse not in the cached data, compute the inverse
-        data <- mx$get()              ## get the value of the matrix
-        invsersemx <- solve(data, ...)  ## computes the inverse
-        mx$setinverse(inversemx)        ## set the value of the inverse into cache
-        return(inversemx)
-        
+        data <- mx$get()                ## get the value of the matrix
+        invsersemx <- solve(data)       ## computes the inverse
+        mx$setinverse(invsersemx)       ## set the value of the inverse into cache
+        inversemx
 }
